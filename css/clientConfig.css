@@ -90,6 +90,7 @@ width: 1280px;
 .btn-default:hover {
 	color: #ffffff !important;
 	border-color: #ffffff !important;
+	background: #363636 !important;
 }
 .el-date-table td.in-range div{
 	background-color: #4a2aff !important;
@@ -170,7 +171,7 @@ width: 1280px;
 .laydate-footer-btns span{
 	border: 1px solid #4a2cf8 !important;
 	background-color: #4a2cf8 !important;
-} 
+}
 .layui-laydate .layui-this{
 	background-color: #4a2cf8 !important;
 }
