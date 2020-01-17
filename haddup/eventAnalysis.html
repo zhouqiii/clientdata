@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>事件分析</title>
+    <link href="https://cdn.bootcss.com/element-ui/2.12.0/theme-chalk/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link href="../css/font-awesome.css" rel="stylesheet" />
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../js/bootstrap-table/bootstrap-table.css" />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../layui/layui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!--<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>-->
+    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+    <link rel="stylesheet" href="../js/multiple/bootstrap-multiselect.css" />
+    <link rel="stylesheet" href="../css/eventAnalysis.css" />
+    <style type="text/css">
+        body{
+            padding: 0;
+            margin: 0;
+        }
+        #changett{
+            margin-right:5% !important;
+        }
+    </style>
+</head>
+<body style="background: #202020;">
+    <div id="wrapper" style="background: #202020">
+    <!-- main结构-->
+        <div id="navigation"></div>
+        <div id="page-wrapper" style="overflow-x: hidden;">
+            <div id="page-inner" class="classpageinner" style="background-color: #202020;min-height: 896px;color: white;">
+                <div class="queryBox" >
+                    <!--<div class="clothArea">-->
+                        <!--<div class="myown">-->
+                            <!--<label style="font-weight:400;font-size: 14px;float:left;margin-right:2%;" class="lableServer" >区服&nbsp;&nbsp;</label>-->
+                            <!--<select name="district" multiple="multiple" id="district" style="border-radius: 0; width: 251px;height: 30px;display: none;">-->
+                            <!--</select>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div class="timePick">
+                        <div style="font-size:14px" class="timeTime">
+                            日期&nbsp;&nbsp;<el-date-picker
+                                class="timePick"
+                                style="margin-left: 3px"
+                                value-format="yyyy-MM-dd"
+                                v-model="ruleForm.dateValue"
+                                type="daterange"
+                                align="bottom"
+                                unlink-panels
+                                range-separator="~"
+                                start-placeholder="开始日期"
+                                end-placeholder="结束日期"
+                                :picker-options="pickerOptions">
+                        </el-date-picker>
+                        </el-date-picker>
+                        </div>
+                    </div>
+                    <div class="queryBtn">
+                        <button type="button" id="cha" class="btn" onclick="queryBtn()">查询</button>
+                    </div>
+                </div>
+                <div class="changeViewBtn">
+                    <div class="selfControl" id="selfBtn">自定义事件</div>
+                    <div class="selfControl" id="selfChangeBtn">修改自定义事件</div>
+                </div>
+                <div class="tableBox">
+                    <div class="tooltop" style="display: flex">
+                        <div style="height: 50px;line-height: 50px;display: flex;width: 100%;justify-content: space-between;flex-wrap: wrap;align-items: center;">
+                           <div class="textSelf">
+                               <div :class="{'activeFir':allEventClass}" @click="allEventTT()" style="cursor: pointer">全部事件</div>
+                               <div v-for="(item,index) in eventNameList" :key="index" :id="item.id" @click="eventList(item.id,index)" :class="{'activeTT':index===clickname}" class="namelist">
+                                       <i class="el-icon-arrow-right" style="margin: 0 15px 0 18px;font-size: 12px"></i>
+                                       <span>{{item.name}}</span>
+                                       <span @click="deleteProEvent(item.id,item.name,event)" style="margin-left: 10px"><i class="el-icon-delete" ></i></span>
+                               </div>
+                           </div>
+                            <div style="width: 25%;float: left">
+                                <input type="text" id="inputContent" placeholder="请输入事件名称">
+                                <button type="button" id="searchBtn" class="btn" onclick="searchEvent()">搜索</button>
+                                <button type="button" id="clearBtn" class="btn" onclick="onclear()">清空</button>
+                                <div class="father">
+                                    <div class="helpDescription">
+                                    <table style="border-radius: 4px;">
+                                        <tr style="height: 30px;line-height: 30px">
+                                            <td colspan="20" style="background: #121212;padding-left: 3px;text-align: left">说明</td>
+                                        </tr>
+                                        <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                            <td colspan="6" style="padding-left: 3px;text-align: left">默认表格说明</td>
+                                            <td colspan="14" style="color: #A4A3AE;padding-left: 15px;text-align: left">默认为近30日第一个自定义事件的所有事件&nbsp;&nbsp;&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                    <i style="background: url('../image/help2.png')" class="help"></i>
+                                </div>
+                                <i id="btnExp" style="background: url('../image/exp2.png')"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 100%;margin-top: .5%">
+                        <table
+                                id="table"
+                                data-detail-view="true"
+                                data-detail-formatter="detailFormatter"
+                                data-classes="table-no-bordered table-striped"
+                        >
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- 自定义事件弹出框 -->
+<div id="customize" style="display: none">
+    <div class="cusHeader">
+        <span class="cusTitle" style="color: #ffffff;font-size: 14px;font-weight: 200">自定义事件</span>
+    </div>
+    <div class="cusContent">
+        <div>
+            <span style="font-size: 14px;color: #ffffff;">界面名称:</span>
+            <input type="text"  id="pageName" placeholder="请输入您要自定义事件的名称" class="cusInput">
+        </div>
+        <div class="eventSelect" style="margin-top: 6%">
+            <label style="font-size: 14px;color: #ffffff;">选择事件:</label>
+            <select name="eventName" multiple="multiple" id="eventName"></select>
+        </div>
+    </div>
+</div>
+<!-- 修改自定义事件弹出框 -->
+<div id="modifyCustomize" style="display: none">
+    <div class="cusHeader">
+        <span class="cusTitle" style="color: #ffffff;font-size: 14px;font-weight: 200">修改自定义事件</span>
+    </div>
+    <div class="cusContent">
+        <div class="eventSelect">
+            <label style="font-size: 14px;color: #ffffff;">自定义事件:</label>
+            <select name="cusEventK" id="cusEvent"></select>
+        </div>
+        <div style="margin-top: 3%">
+            <span style="font-size: 14px;color: #ffffff;">修&nbsp;改&nbsp;名&nbsp;称:&nbsp;</span>
+            <input type="text"  id="modifyName" placeholder="请输入您要设置的事件名称" class="cusInput">
+        </div>
+        <div class="eventSelect" style="margin-top: 3%" id="selectAdd">
+            <label style="font-size: 14px;color: #ffffff;">选&nbsp;择&nbsp;事&nbsp;件:</label>
+            <select name="modEventName" multiple="multiple" id="modEventName"></select>
+        </div>
+    </div>
+</div>
+<!--由于我不想再找bootstrap-table导出功能，所以我依然使用table2excel做表格导出-->
+<div class="tableClass" style="display: none">
+    <table id="tableEvent">
+        <thead>
+        <tr>
+            <th style="color: black">事件类型</th>
+            <th style="color: black">事件名称</th>
+            <th style="color: black">每启动发生次数</th>
+        </tr>
+        </thead>
+        <tbody id="bodyEvent"></tbody>
+    </table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdn.bootcss.com/element-ui/2.12.0/index.js"></script>
+<script src="http://cdn.hcharts.cn/highcharts/6.1.1/highcharts.js"></script>
+<script src="../js/multiple/bootstrap-multiselect.js"></script>
+<script src="../js/jquery.table2excel.js"></script>
+<script src="../js/eventAnalysis.js"></script>
+<script>
+    $('#navigation').load('navHaddup.html')
+    var vm_analysis=new Vue({
+        el: '#page-inner',
+        data: {
+            clickname:0,
+            eventNameList:[],
+            allEventClass:false,
+            pickerOptions: {
+                disabledDate(time) {
+                    return time.getTime() > Date.now();//如果有后面的-8.64e7就是不可以选择今天的
+                },
+                shortcuts: [
+                    {
+                        text: '今日',
+                        onClick(picker) {
+                            var end = new Date();
+                            var start = new Date();
+                            start.setTime(start.getTime());
+                            picker.$emit('pick', [start, end]);
+                        }
+                    },
+                    {
+                        text: '昨日',
+                        onClick(picker) {
+                            var end = new Date();
+                            var start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 );
+                            end.setTime(end.getTime() - 3600 * 1000 * 24 );
+                            picker.$emit('pick', [start, end]);
+                        }
+                    },{
+                        text: '近7日',
+                        onClick(picker) {
+                            var end = new Date();
+                            var start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 8);
+                            end.setTime(end.getTime() - 3600 * 1000 * 24 );
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }, {
+                        text: '近30日',
+                        onClick(picker) {
+                            var end = new Date();
+                            var start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 31);
+                            end.setTime(end.getTime() - 3600 * 1000 * 24 );
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }, {
+                        text: '全部',
+                        onClick(picker) {
+                            var end = new Date();
+                            var start = new Date('2019-10-9 00:00:00');
+                            end.setTime(end.getTime());
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }]
+            },
+            ruleForm: {dateValue: ""},
+        },
+        computed: {
+            timeDefaulttoday() {
+                var date = new Date();
+                var oneweekdate = new Date(date);
+                var y = oneweekdate.getFullYear();
+                var m = oneweekdate.getMonth()+1;
+                var d = oneweekdate.getDate();
+                var formatwdate = y+'-'+m+'-'+d;
+                return formatwdate;
+            },
+            timeDefaultLast() {
+                var date = new Date();
+                var oneweekdate = new Date(date-30*24*3600*1000);
+                var y = oneweekdate.getFullYear();
+                var m = oneweekdate.getMonth()+1;
+                var d = oneweekdate.getDate();
+                var formatwdate = y+'-'+m+'-'+d;
+                return formatwdate;
+            }
+        },
+        mounted() {
+            // 初始化查询，默认为前一周
+            this.ruleForm.dateValue = [this.timeDefaultLast,this.timeDefaulttoday];
+
+        },
+        methods: {
+            eventList(id,index){
+                this.clickname=index
+                this.allEventClass=false
+                eventList(id)
+            },
+            deleteProEvent(id,name,e){
+                e.stopPropagation();
+                var mymessage=confirm('确认删除"'+name+'"吗')
+                if(mymessage===true){
+                    deleteEvent(id)
+                }else{
+                    return false
+                }
+            },
+            allEventTT(){
+                this.clickname=''
+                this.allEventClass=true
+                allEventData()
+            }
+        }
+    })
+    homedate()
+    //表格
+    function initTable(data) {
+        $('#table').bootstrapTable('destroy')
+        $('#table').bootstrapTable({
+            // height: 550,
+            data:data,
+            queryParamsType: "",
+            striped: true, //设置为 true 会有隔行变色效果
+            undefinedText: "空", //当数据为 undefined 时显示的字符
+            pagination: true, //分页
+            paginationLoop: false,
+            showToggle: false, //是否显示 切换试图（table/card）按钮
+            pageNumber: 1, //如果设置了分页，首页页码
+            pageSize: 10, //如果设置了分页，页面数据条数
+            pageList: [10, 30, 50, 100,'All'], //如果设置了分页，设置可供选择的页面数据条数。设置为All 则显示所有记录。
+            paginationPreText: '‹', //指定分页条中上一页按钮的图标或文字,这里是<
+            paginationNextText: '›', //指定分页条中下一页按钮的图标或文字,这里是>
+            search: false, //显示搜索框
+            data_local: "zh-US", //表格汉化
+            sidePagination: "client", //服务端处理分页
+            columns: [
+                 {
+                    title: '事件类型',
+                    field: 'eventTypeName',
+                    align: 'center',
+                }, {
+                    title: '事件名称',
+                    field: 'eventName',
+                    align: 'center'
+                },
+                {
+                    field: 'eventTimes',
+                    title: '每启动发生次数',
+                    align: 'center'
+                },
+                // {
+                //     title: '详情',
+                //     align: 'center',
+                //    formatter:function (value, row, index) {
+                //        return '<span class="showDel" style="color:#52C93C;font-size: 14px" onclick="detaileShowFun(this)">详情</span>'
+                //    }
+                // }
+            ]
+        })
+    }
+    //时间选择器
+    window.setInterval(function () {
+        var monthSel=document.getElementsByClassName('el-picker-panel__icon-btn el-icon-arrow-right')
+        var yearSel=document.getElementsByClassName('el-picker-panel__icon-btn el-icon-d-arrow-right')
+        monthSel[0].disabled=false
+        monthSel[0].classList.remove("is-disabled");
+        yearSel[0].disabled=false
+        yearSel[0].classList.remove("is-disabled");
+    },400)
+    //事件数据导出
+    $("#btnExp").click(function(){
+        $("#tableEvent").table2excel({
+            exclude: ".noExl",
+            name: "Excel Document Name",
+            filename: "事件数据",
+            exclude_img: true,
+            exclude_links: true,
+            exclude_inputs: true,
+        });
+    })
+</script>
+</html>

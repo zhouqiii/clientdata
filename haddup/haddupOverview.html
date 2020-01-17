@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html" charset="utf-8">
+    <title>总览趋势</title>
+    <!-- Bootstrap Styles-->
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../js/multiple/bootstrap-multiselect.css" />
+    <link href="https://cdn.bootcss.com/element-ui/2.12.0/theme-chalk/index.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="../js/dataTables/dataTables.bootstrap.css" />-->
+    <link rel="stylesheet" type="text/css" href="../css/animate.min.css"/>
+    <!-- FontAwesome Styles-->
+    <link href="../css/font-awesome.css" rel="stylesheet" />
+    <!-- Morris Chart Styles-->
+    <link href="../js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="../css/realAll.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../css/calendar.css"/>
+    <link rel="stylesheet" href="../js/bootstrap-table/bootstrap-table.css" />
+    <link rel="stylesheet" href="../js/loading/jquery.mloading.css" />
+    <link rel="stylesheet" href="../laydate-master/src/theme/default/laydate.css" />
+    <link rel="stylesheet" href="../css/aaa-loading.css" />
+    <style type="text/css">
+        #changett{
+            margin-right: 5% !important;
+        }
+    </style>
+</head>
+<body style="background-color: #202020;min-width:1850px;" id="bodywidth">
+<div id="wrapper">
+    <div id="left-nav"></div>
+    <!-- main结构-->
+    <div id="page-wrapper" style="overflow-x: hidden;background: #202020;">
+        <div id="page-inner" class="classpageinner" style="background-color: #202020;min-height: 896px;color: white;margin-top: 3.5%">
+            <div class="form-group col-xs-12" style="float: left;margin-bottom: 20px;width:100%;border: 1px solid #707070;height: 60px;" id="dangerLine">
+                <div class="col-xs-3 col-sm-3 col-xs-3" style="margin-top: 1%;" id="serverCos" style="width:400px">
+                    <div class="myown">
+                        <label style="font-weight:400;font-size: 14px;float:left;margin-right:2%;margin-top:4px" class="lableServer" >区服</label>
+                        <select name="district" multiple="multiple" size="5" id="district" style=" border-radius: 0; width: 251px;height: 30px;display: none" class="form-control">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-xs-3 col-xs-pull-0" id="data_5" style="margin-top:1.1%;width: 20%;">
+                    <div style="font-size:14px" class="timeTime">
+                        日期&nbsp; <el-date-picker
+                            class="timePick"
+                            value-format="yyyy-MM-dd"
+                            v-model="ruleForm.dateValue"
+                            type="daterange"
+                            align="bottom"
+                            unlink-panels
+                            range-separator="~"
+                            start-placeholder="开始日期"
+                            end-placeholder="结束日期"
+                            :picker-options="pickerOptions">
+                    </el-date-picker>
+                    </div>
+                </div>
+                <button type="button" id="cha" class="btn" onclick="onblu()">查询</button>
+            </div>
+            <div class="real-top">
+                <p id="real-p1" class="p-float" style="padding-top:1%;margin-left: 0;">
+                    <span id="circleA" class="circle"></span>
+                    <span class="textN">注册账号</span>
+                    <br />
+                    <span id='leiji' class="number"></span>
+                </p>
+                <p id="real-pJ" class="p-float" style="padding-top:1%">
+                    <span id="circleB" class="circle"></span>
+                    <span class="textN">首次激活</span>
+                    <br />
+                    <span id='activation' class="number"></span>
+                </p>
+                <p id="real-p6" class="p-float" style="padding-top:1%">
+                    <span id="circleC" class="circle"></span>
+                    <span class="textN">活跃账号</span>
+                    <br />
+                    <span id='averageNum' class="number"></span>
+                </p>
+                <p id="real-p2" class="p-float" style="padding-top:1%">
+                    <span id="circleD" class="circle"></span>
+                    <span class="textN">付费账号</span>
+                    <br />
+                    <span id='huo' class="number">+0</span>
+                </p>
+                <p id="real-p4" class="p-float" style="padding-top:1%">
+                    <span id="circleE" class="circle"></span>
+                    <span class="textN">付费金额</span>
+                    <br />
+                    <span id='money' class="number">+0.00</span>
+                </p>
+            </div>
+            <div id="real-inner" style="width: 100%">
+                <div class="main conceal" style="height: 364px;width: 100%;">
+                    <i style="background: url('../image/exp2.png')" id="real-btn"></i>
+                    <!--<button id="real-btn" style="margin-top:.8%;color:#fff;"><span style="font-size: 14px">导出</span></button>-->
+                    <div class="father">
+                        <div class="helpDescription">
+                            <table style="border-radius: 4px;">
+                                <tr style="height: 30px;line-height: 30px">
+                                    <td colspan="8" style="background: #121212;padding-left: 3px">总览趋势说明</td>
+                                </tr>
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">注册账号</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日注册账号</td>
+                                </tr>
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">首次登录</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日账号首次激活</td>
+                                </tr>
+
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">活跃账号</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日游戏活跃账号及趋势图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                </tr>
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">付费账号</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日付费账号</td>
+                                </tr>
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">付费金额</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日账号的付费金</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <i style="background: url('../image/help2.png')" class="help"></i>
+                    </div>
+                    <div id="div-one" style="width: 99.5%;height: 362px;"></div>
+                    <div class="titleLoadAdd" style="font-size: 12px;float: left;padding-top: 1%;margin-left:50%;margin-top:8%;text-align: center;color:#ffffff;" id="loadregister"><i class="el-icon-loading" style="font-size: 28px;vertical-align: middle;"></i><div style="margin-top: 5px">加载中...</div></div>
+                    <!--<i style="background: url('../image/exp2.png')" class="real-btnAll"></i>-->
+                    <!--<div class="real-btnAll">-->
+                    <!--<button style="color:#fff;border: none"><span style="font-size: 14px">导出</span></button>-->
+                    <!--</div>-->
+                    <div class="real-table" style="display: none">
+                        <table id="real-datatable">
+                            <thead>
+                            <tr>
+                                <th>日期</th>
+                                <th>注册账号</th>
+                            </tr>
+                            </thead>
+                            <tbody id="real-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="mainA conceal" style="height: 364px;width: 100%">
+                    <i style="background: url('../image/exp2.png')" id="real-btnA"></i>
+                    <!--<button id="real-btnA" style="margin-top:.8%;color:#fff;"><span style="font-size: 14px">导出</span></button>-->
+                    <div class="father">
+                        <div class="helpDescription">
+                            <table style="border-radius: 4px;">
+                                <tr style="height: 30px;line-height: 30px">
+                                    <td colspan="8" style="background: #121212;padding-left: 3px">总览趋势说明</td>
+                                </tr>
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">注册账号</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日注册账号</td>
+                                </tr>
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">首次登录</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日账号首次激活</td>
+                                </tr>
+
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">活跃账号</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日游戏活跃账号及趋势图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                </tr>
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">付费账号</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日付费账号</td>
+                                </tr>
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">付费金额</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日账号的付费金</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <i style="background: url('../image/help2.png')" class="help" id="activebtn"></i>
+                    </div>
+                    <div id="div-A" style="width:1600px;height: 330px;padding-left: 13px;display: grid;float: left"></div>
+                    <div class="titleLoadAdd" style="font-size: 12px;float: left;padding-top: 1%;margin-left:50%;margin-top:8%;text-align: center;color:#ffffff;" id="loadfirst"><i class="el-icon-loading" style="font-size: 28px;vertical-align: middle;"></i><div style="margin-top: 5px">加载中...</div></div>
+                    <!--<i style="background: url('../image/exp2.png')" class="real-btnAll"></i>-->
+                    <!--<div class="real-btnAll">-->
+                    <!--<button style="color:#fff;border: none"><span style="font-size: 14px">导出</span></button>-->
+                    <!--</div>-->
+                    <div class="real-table-A" style="display: none">
+                        <table id="real-datatableA">
+                            <thead>
+                            <tr>
+                                <th>日期</th>
+                                <th>活跃账号</th>
+                            </tr>
+                            </thead>
+                            <tbody id="real-tbodyA"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="mainJ conceal" style="height: 364px;width: 100%">
+                    <i style="background: url('../image/exp2.png')" id="real-btnJ"></i>
+                    <!--<button id="real-btnJ" style="margin-top:.8%;color:#fff;"><span style="font-size: 14px">导出</span></button>-->
+                    <div class="father">
+                        <div class="helpDescription">
+                            <table style="border-radius: 4px;">
+                                <tr style="height: 30px;line-height: 30px">
+                                    <td colspan="8" style="background: #121212;padding-left: 3px">总览趋势说明</td>
+                                </tr>
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">注册账号</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日注册账号</td>
+                                </tr>
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">首次登录</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日账号首次激活</td>
+                                </tr>
+
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">活跃账号</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日游戏活跃账号及趋势图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                </tr>
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">付费账号</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日付费账号</td>
+                                </tr>
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">付费金额</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日账号的付费金</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <i style="background: url('../image/help2.png')" class="help"></i>
+                    </div>
+                    <div id="div-J" style="width: 99.5%;height: 362px;"></div>
+                    <div class="titleLoadAdd" style="font-size: 12px;float: left;padding-top: 1%;margin-left:50%;margin-top:8%;text-align: center;color:#ffffff;" id="loadactive"><i class="el-icon-loading" style="font-size: 28px;vertical-align: middle;"></i><div style="margin-top: 5px">加载中...</div></div>
+                    <!--<i style="background: url('../image/exp2.png')" class="real-btnAll"></i>-->
+                    <!--<div class="real-btnAll">-->
+                    <!--<button style="color:#fff;border: none"><span style="font-size: 14px">导出</span></button>-->
+                    <!--</div>-->
+                    <div class="real-table-J" style="display: none">
+                        <table id="real-datatableJ">
+                            <thead>
+                            <tr>
+                                <th>时间</th>
+                                <th>首次激活账号</th>
+                            </tr>
+                            </thead>
+                            <tbody id="real-tbodyJ"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="mainN conceal" style="height: 364px;width: 100%">
+                    <i style="background: url('../image/exp2.png')" id="real-btnN"></i>
+                    <!--<button id="real-btnN" style="margin-top:.8%;color:#fff;"><span style="font-size: 14px">导出</span></button>-->
+                    <div class="father">
+                        <div class="helpDescription">
+                            <table style="border-radius: 4px;">
+                                <tr style="height: 30px;line-height: 30px">
+                                    <td colspan="8" style="background: #121212;padding-left: 3px">总览趋势说明</td>
+                                </tr>
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">注册账号</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日注册账号</td>
+                                </tr>
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">首次登录</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日账号首次激活</td>
+                                </tr>
+
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">活跃账号</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日游戏活跃账号及趋势图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                </tr>
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">付费账号</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日付费账号</td>
+                                </tr>
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">付费金额</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日账号的付费金</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <i style="background: url('../image/help2.png')" class="help"></i>
+                    </div>
+                    <div id="div-N" style="width: 100%;height: 362px;background: #363636">暂无数据</div>
+                    <div class="titleLoadAdd" style="font-size: 12px;float: left;padding-top: 1%;margin-left:50%;margin-top:8%;text-align: center;color:#ffffff;" id="loadpay"><i class="el-icon-loading" style="font-size: 28px;vertical-align: middle;"></i><div style="margin-top: 5px">加载中...</div></div>
+                    <!--<i style="background: url('../image/exp2.png')" class="real-btnAll"></i>-->
+                    <!--<div class="real-btnNum">-->
+                    <!--<button style="color:#fff;border: none"><span style="font-size: 14px">导出</span></button>-->
+                    <!--</div>-->
+                    <div class="real-table-J" style="display: none">
+                        <table id="real-datatableN">
+                            <thead>
+                            <tr>
+                                <th>时间</th>
+                                <th>首次激活账号</th>
+                            </tr>
+                            </thead>
+                            <tbody id="real-tbodyN"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="mainM conceal" style="height: 364px;width: 100%">
+                    <i style="background: url('../image/exp2.png')" id="real-btnM"></i>
+                    <!--<button id="real-btnM" style="margin-top:.8%;color:#fff;"><span style="font-size: 14px">导出</span></button>-->
+                    <div class="father">
+                        <div class="helpDescription">
+                            <table style="border-radius: 4px;">
+                                <tr style="height: 30px;line-height: 30px">
+                                    <td colspan="8" style="background: #121212;padding-left: 3px">总览趋势说明</td>
+                                </tr>
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">注册账号</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日注册账号</td>
+                                </tr>
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">首次登录</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日账号首次激活</td>
+                                </tr>
+
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">活跃账号</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日游戏活跃账号及趋势图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                </tr>
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">付费账号</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日付费账号</td>
+                                </tr>
+                                <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                    <td colspan="1" style="padding-left: 3px">付费金额</td>
+                                    <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">默认为近30日账号的付费金</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <i style="background: url('../image/help2.png')" class="help"></i>
+                    </div>
+                    <div id="div-M" style="width: 100%;height: 362px;background: #363636">暂无数据</div>
+                    <div class="titleLoadAdd" style="font-size: 12px;float: left;padding-top: 1%;margin-left:50%;margin-top:8%;text-align: center;color:#ffffff;" id="loadamount"><i class="el-icon-loading" style="font-size: 28px;vertical-align: middle;"></i><div style="margin-top: 5px">加载中...</div></div>
+                    <!--<i style="background: url('../image/exp2.png');display: inline" class="real-btnAll"></i>-->
+                    <!--<div class="real-btnMon">-->
+                    <!--<button style="color:#fff;border: none"><span style="font-size: 14px">导出</span></button>-->
+                    <!--</div>-->
+                    <div class="real-table-M" style="display: none">
+                        <table id="real-datatableM">
+                            <thead>
+                            <tr>
+                                <th>时间</th>
+                                <th>首次激活账号</th>
+                            </tr>
+                            </thead>
+                            <tbody id="real-tbodyM"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="real-table-All">
+                    <i style="background: url('../image/exp2.png')" class="real-btnAll" id="dataall"></i>
+                    <table id="real-datatableAll" style="text-align: center">
+                    </table>
+                    <div class="titleLoadAdd" style="font-size: 12px;float: left;padding-top: 1%;margin-left:50%;margin-top:8%;text-align: center;color:#ffffff;" id="loadtable"><i class="el-icon-loading" style="font-size: 28px;vertical-align: middle;"></i><span style="margin-left: 5px">加载中...</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdn.bootcss.com/element-ui/2.12.0/index.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/loading/jquery.mloading.js"></script>
+<script src="http://cdn.hcharts.cn/highcharts/6.1.1/highcharts.js"></script>
+<script src="../js/highcharts/exporting.js"></script>
+<script src="http://cdn.hcharts.cn/highcharts/6.1.1/modules/data.js"></script>
+<script src="https://cdn.bootcss.com/echarts/4.3.0-rc.2/echarts.min.js"></script>
+<script src="../js/rili/bootstrap-datepicker.js"></script>
+<script src="../js/rili/cropper.min.js"></script>
+<script src="../js/rili/form-advanced-demo.min.js"></script>
+<script src="../js/jquery.table2excel.js"></script>
+<script src="../js/jquery.metisMenu.js"></script>
+<script src="../js/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../js/multiple/bootstrap-multiselect.js"></script>
+<script src="../haddup/js/haddupOverview.js"></script>
+<script src="../laydate-master/src/laydate.js"></script>
+<script type="text/javascript">
+    $('#left-nav').load('navHaddup.html')
+    window.localStorage.clear();
+
+    var vm=new Vue({
+        el:'#data_5',
+        data:{
+            msg:'hello',
+            pickerOptions: {
+                disabledDate(time) {
+                    return time.getTime() > Date.now();
+                },
+                shortcuts: [{
+                    text: '今日',
+                    onClick(picker) {
+                        var end = new Date();
+                        var start = new Date();
+                        start.setTime(start.getTime());
+                        picker.$emit('pick', [start, end]);
+                    }
+                },{
+                    text: '昨日',
+                    onClick(picker) {
+                        var end = new Date();
+                        var start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 );
+                        end.setTime(end.getTime() - 3600 * 1000 * 24 );
+                        picker.$emit('pick', [start, end]);
+                    }
+                },{
+                    text: '近7日',
+                    onClick(picker) {
+                        var end = new Date();
+                        var start = new Date();
+                        end.setTime(end.getTime() - 3600 * 1000 * 24);
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                        picker.$emit('pick', [start, end]);
+                    }
+                }, {
+                    text: '近30日',
+                    onClick(picker) {
+                        var end = new Date();
+                        var start = new Date();
+                        end.setTime(end.getTime() - 3600 * 1000 * 24);
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                        picker.$emit('pick', [start, end]);
+                    }
+                }, {
+                    text: '全部',
+                    onClick(picker) {
+                        var end = new Date();
+                        var start = new Date('2019-10-8 00:00:00');
+                        picker.$emit('pick', [start, end]);
+                        var end = new Date();
+                        var start = new Date('2019-10-8 00:00:00');
+                        picker.$emit('pick', [start, end]);
+                        var end = new Date();
+                        var start = new Date('2019-10-9 00:00:00');
+                        picker.$emit('pick', [start, end]);
+                    }
+                }]
+            },
+            ruleForm: { dateValue: "" },
+        },
+        computed: {
+            timeDefault() {
+                var date = new Date();
+                // var date=new Date(dateNow-24*3600*1000);
+                var s1 = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate());
+                return s1;
+            },
+            timeDefaultLast() {
+                var date = new Date();
+                var oneweekdate = new Date(date-30*24*3600*1000);
+                var y = oneweekdate.getFullYear();
+                var m = oneweekdate.getMonth()+1;
+                var d = oneweekdate.getDate();
+                var formatwdate = y+'-'+m+'-'+d;
+                return formatwdate;
+            }
+        },
+        mounted() {
+            // 初始化查询，默认为前一周
+            this.ruleForm.dateValue = [this.timeDefaultLast,this.timeDefault];
+        },
+        methods: {
+            handleOpen(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            handleClose(key, keyPath) {
+                console.log(key, keyPath);
+            },
+        }
+    })
+    window.setInterval(function () {
+        var monthtt=document.getElementsByClassName('el-icon-arrow-right')
+        var yeartt=document.getElementsByClassName('el-icon-d-arrow-right')
+        monthtt[0].disabled=false
+        monthtt[0].classList.remove("is-disabled");
+        yeartt[0].disabled=false
+        yeartt[0].classList.remove("is-disabled");
+    },400)
+    // $(".timeTime").click(function () {
+    //     alert(2)
+    //     var monthtt=document.getElementsByClassName('el-icon-arrow-right')
+    //     var yeartt=document.getElementsByClassName('el-icon-d-arrow-right')
+    //     monthtt[0].disabled=false
+    //     monthtt[0].classList.remove("is-disabled");
+    //     yeartt[0].disabled=false
+    //     yeartt[0].classList.remove("is-disabled");
+    // })
+    window.setInterval(function () {
+        var monthtt=document.getElementsByClassName('el-icon-arrow-right')
+        var yeartt=document.getElementsByClassName('el-icon-d-arrow-right')
+        monthtt[0].disabled=false
+        monthtt[0].classList.remove("is-disabled");
+        yeartt[0].disabled=false
+        yeartt[0].classList.remove("is-disabled");
+    },400)
+    // $(".timeTime").click(function () {
+    //     alert(2)
+    //     var monthtt=document.getElementsByClassName('el-icon-arrow-right')
+    //     var yeartt=document.getElementsByClassName('el-icon-d-arrow-right')
+    //     monthtt[0].disabled=false
+    //     monthtt[0].classList.remove("is-disabled");
+    //     yeartt[0].disabled=false
+    //     yeartt[0].classList.remove("is-disabled");
+    // })
+    window.setInterval(function () {
+        var monthtt=document.getElementsByClassName('el-icon-arrow-right')
+        var yeartt=document.getElementsByClassName('el-icon-d-arrow-right')
+        monthtt[0].disabled=false
+        monthtt[0].classList.remove("is-disabled");
+        yeartt[0].disabled=false
+        yeartt[0].classList.remove("is-disabled");
+
+    },400)
+    //新增
+    $("#real-btn").click(function(){
+        $("#real-datatable").table2excel({
+            exclude: ".noExl",
+            name: "Excel Document Name",
+            filename: "注册数量",
+            exclude_img: true,
+            exclude_links: true,
+            exclude_inputs: true,
+        });
+    });
+    //激活
+    $("#real-btnJ").click(function(){
+        $("#real-datatableJ").table2excel({
+            exclude: ".noExl",
+            name: "Excel Document Name",
+            filename: "激活数量",
+            exclude_img: true,
+            exclude_links: true,
+            exclude_inputs: true,
+        });
+    });
+    //官网累计
+    $("#real-btnA").click(function(){
+        $("#real-datatableA").table2excel({
+            exclude: ".noExl",
+            name: "Excel Document Name",
+            filename: "活跃数量",
+            exclude_img: true,
+            exclude_links: true,
+            exclude_inputs: true,
+        });
+    });
+
+    //付费金额
+    $("#dataall").click(function(){
+        $("#real-datatableAll").table2excel({
+            exclude: ".noExl",
+            name: "Excel Document Name",
+            filename: "统计数据",
+            exclude_img: true,
+            exclude_links: true,
+            exclude_inputs: true,
+        });
+    });
+    $('.p-float').click(function(obj){
+        // $('.p-float').css("border-bottom","none")
+        $('.p-float').css("background","#202020")
+        var idcurrent=obj.currentTarget.id
+        // $('#'+idcurrent).css("border-bottom","2px solid #1E9FFF")
+        $('#'+idcurrent).css("background","#363636")
+    })
+
+    firstLload()
+    function firstLload(){
+        $("#real-p1").click()
+    }
+    var winWidth = 0,winHeight = 0;
+    function changebleWidthHeight() {
+        if (window.innerWidth)
+            winWidth = window.innerWidth;
+        else if ((document.body) && (document.body.clientWidth))
+            winWidth = document.body.clientWidth;
+//获取窗口高度
+        if (window.innerHeight)
+            winHeight = window.innerHeight;
+        else if ((document.body) && (document.body.clientHeight))
+            winHeight = document.body.clientHeight;
+//通过深入Document内部对body进行检测，获取窗口大小
+        if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth)
+        {
+            winHeight = document.documentElement.clientHeight;
+            winWidth = document.documentElement.clientWidth;
+        }
+
+        document.getElementById("serverCos").style.width = winWidth - 50
+        document.getElementById("data_5").style.width = winWidth - 40
+        document.getElementById("div-A").style.width = winWidth - 100
+    }
+    window.onresize = changebleWidthHeight();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,519 @@
+#page-wrapper{
+    padding: 1% 1.5% 2% 1%;
+}
+#page-inner{
+    margin-left:10.5%;
+}
+.clothArea{
+    width: 16%;
+}
+.timePick{
+    width: 15%;
+}
+input[type="checkbox"],input[type="radio"]{
+    width: 16px;
+    height: 16px;
+    background-color: transparent;
+    -webkit-appearance:none;
+    border: 1px solid #707070;
+    border-radius: 0;
+    outline: none;
+    cursor: pointer;
+    float: left;
+}
+input[type="checkbox"]:checked,input[type="radio"]:checked{
+    background: url('../image/组 35s.png');
+    background-position: center !important;
+}
+.multiselect-container>li>a>label>input[type=checkbox] {
+    margin-bottom: 0;
+}
+.multiselect-all .checkbox input[type="checkbox"]{
+    width: 16px;
+    height: 16px;
+    background-color: #ffffff;
+    -webkit-appearance:none;
+    border: 1px solid #707070;
+    border-radius: 0;
+    outline: none;
+    cursor: pointer;
+    float: left;
+}
+.multiselect-all .checkbox input[type="checkbox"]:checked{
+    background: url('../image/组 35s.png');
+    background-position: center !important;
+}
+.queryBox{
+    margin-top: 3.8%;
+    padding-left: 1%;
+    width: 100%;
+    display: flex;
+    border: 1px solid #707070;
+    height: 60px;
+    line-height: 60px;
+}
+.myown>.multiselect-native-select>.multiselect-native-select>.btn-group>button {
+    border-color: #707070 !important;
+    height: 28px;
+    color: #999999 !important;
+    margin-left: 22% !important;
+    margin-top: -27% !important;
+}
+/*分页*/
+.btn-default:hover {
+    color: #999999 !important;
+    border-color: #707070 !important;
+}
+.btn{
+    border-radius: 0;
+    padding: 0;
+    background: #242424;
+    border: 1px solid #707070;
+    color: #999999;
+}
+.btn:focus, .btn:hover{
+    color: #999999 !important;
+}
+.page-link{
+    background: #202020 !important;
+    border: 0 !important;
+}
+.dropdown-item{
+    width: 100%;
+    float: left;
+    padding: 3% 6%;
+
+}
+.pagination>.active>a {
+    background-color: #121212 !important;
+}
+.page-list .dropdown-menu{
+    transform: none !important;
+    top:auto !important;
+}
+/*分页*/
+/*elementui时间选择器样式*/
+.el-input__icon{
+    line-height: 30px !important;
+}
+.el-date-table td.current span{
+    background-color: #4a2aff !important;
+}
+.el-input__inner{
+    border-radius: 0 !important;
+    background: #202020 !important;
+    color: #999999 !important;
+    text-align: center !important;
+    height: 28px !important;
+    width: 183px !important;
+    border-color: #707070 !important;
+    cursor: pointer;
+}
+.el-input__suffix{
+    display: none;
+}
+.el-input__icon{
+    color: #999999;
+}
+.timePick .el-date-table td.today span {
+    color: #4a2cf8 !important;
+}
+.el-date-table td.in-range div{
+    background-color: #4a2aff !important;
+    color: #ffffff;
+}
+.el-date-picker.has-sidebar {
+    width: 390px !important;
+}
+.el-date-range-picker.has-sidebar {
+    width: 20% !important;
+}
+.el-picker-panel__content.el-date-range-picker__content.is-right{
+    display: none !important;
+}
+
+.el-date-range-picker .el-picker-panel__body {
+    min-width: 180px !important;
+}
+.el-picker-panel__content.el-date-range-picker__content.is-left{
+    width: 100% !important;
+}
+.el-picker-panel [slot=sidebar], .el-picker-panel__sidebar {
+    width: 17% !important;
+}
+.el-range-editor.is-active, .el-range-editor.is-active:hover {
+    border-color: #4a2aff !important;
+}
+.el-date-table td.end-date span{
+    background-color: #4a2aff !important;
+}
+.el-date-table td.start-date span{
+    background-color: #4a2aff !important;
+}
+.el-picker-panel__shortcut:hover {
+    color: #4a2aff !important;
+}
+.el-picker-panel {
+    line-height: 20px !important;
+}
+.el-date-table td.available:hover {
+    color: #4a2aff !important;
+}
+.el-picker-panel__body{
+    margin-left: 18% !important;
+}
+.el-date-editor .el-range__icon {
+    line-height: 20px !important;
+}
+.el-date-editor .el-range__close-icon {
+    display: none !important;
+}
+.el-date-editor .el-range-separator {
+    line-height: 20px !important;
+    padding: 0 !important;
+}
+.el-range-editor .el-range-input{
+    color: #999999 !important;
+    background: #202020 !important;
+}
+.el-input__inner{
+    padding: 3px 0 !important;
+    width: 185px !important;
+}
+.el-range-separator{
+    color: #999999 !important;
+}
+/*时间选择器样式结束*/
+
+#cha{
+    background-color: #707070;
+    color: white;
+    width: 80px;
+    height: 28px;
+    font-size: 14px;
+}
+#searchBtn{
+    background-color: #D6731B;
+    color: white;
+    width: 46px;
+    height: 23px;
+    font-size: 12px;
+    margin-left: 1.3%;
+}
+#clearBtn{
+    background-color: #363636;
+    color: white;
+    width: 46px;
+    height: 23px;
+    font-size: 12px;
+    margin-left: 1.3%;
+}
+
+.helpDescription{
+    display: none;
+    position: absolute;
+    /*margin-left: 1%;*/
+    /*margin-top: 1%;*/
+    z-index: 100;
+}
+.queryinput{
+    width: 20%;
+    margin-left: 1.8%;
+}
+#inputContent{
+    height: 23px;
+    background: #202020;
+    border: 1px solid #707070;
+    width: 53%;
+    color: #999999;
+    font-size: 12px;
+}
+.father:hover .helpDescription{display: block}
+.help{
+    width: 15px;
+    height: 15px;
+    float: right;
+    margin-top: -7%;
+    margin-right: 12%;
+}
+#btnExp{
+    width: 15px;
+    height: 15px;
+    margin-right: 5%;
+    margin-top: -7%;
+    cursor: pointer;
+    float: right;
+}
+.tableBox{
+    width: 100%;
+    border: 1px solid #707070;
+}
+.btn-group{
+    display: block !important;
+}
+.myown>.multiselect-native-select>.multiselect-native-select>.btn-group>.multiselect-container{
+    width: 183px !important;
+    border: none !important;
+    padding: 0;
+
+}
+.changeViewBtn{
+    height: 65px;
+    line-height: 65px;
+    padding-top: 20px;
+    display: flex
+}
+.selfControl{
+    width: 105px;
+    height: 23px;
+    line-height: 25px;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+}
+#selfBtn{
+    background: #10C7B6;
+}
+#selfChangeBtn{
+    background: #52C93C;
+    margin-left: 2.5%;
+}
+.textSelf{
+    padding-left: 1%;
+    display: flex;
+    width:75%;
+    color: #999999;
+}
+/* 自定义表格样式*/
+
+/* 隔行变色*/
+.table-striped > tbody > tr:nth-child(2n+1) > td,
+.table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: #363636;/*此处是自己想用的颜色*/
+    height: 40px;
+    text-align: center;
+}
+.table-striped > tbody > tr:nth-child(2n) > td,
+.table-striped > tbody > tr:nth-child(2n) > th {
+    background-color: #292929;/*此处是自己想用的颜色*/
+    height: 40px;
+    text-align: center;
+}
+#table>thead>tr{
+    background-color: #121212;
+}
+.fixed-table-container thead th .th-inner{
+    font-weight: 400;
+}
+.fixed-table-container{
+    border: 0 !important;
+}
+.fixed-table-container tbody td {
+    border: 0;
+}
+.fixed-table-container thead th{
+    border: 0;
+    padding: 0 5px;
+}
+.fixed-table-footer{
+    border: 0;
+}
+.fa{
+    color: #52C93C !important;
+}
+/*表格样式结束*/
+/*弹出框样式*/
+.layui-layer{
+    background-color: #202020 !important;
+}
+.layui-layer-btn{
+    text-align: center !important;
+}
+.layui-layer-btn .layui-layer-btn0 {
+    border-color: #10C7B6 !important;
+    background-color: #10C7B6 !important;
+    color: #fff;
+    width: 88px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 14px;
+    border-radius: 0;
+}
+.layui-layer-btn .layui-layer-btn1 {
+    border-color: #999999 !important;
+    background-color: #999999 !important;
+    color: #fff;
+    width: 88px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 14px;
+    border-radius: 0;
+    margin-left: 3%;
+}
+/*弹出框样式结束*/
+.layui-layer-page{
+    border:1px solid #707070;
+}
+#customize{
+    height: 100%;
+}
+.cusHeader{
+    height: 13%;
+    border-bottom: 1px solid #707070;
+    line-height: 60px;
+    padding-left: 4%;
+}
+.layui-layer-ico{
+    opacity: 0 !important;
+}
+.el-icon-close{
+    font-size: 24px;
+    color: #707070;
+    margin-left: -20px;
+}
+.cusContent{
+    height: 80%;
+    padding: 5.5% 0% 0% 8.5%;
+}
+#pageName{
+    border: 1px solid #707070;
+    width: 68%;
+    height: 36px;
+    line-height: 36px;
+    background: #202020;
+    color: #999999;
+    font-size: 14px;
+    width: 68%;
+    margin-left: 2%;
+    text-align: center;
+}
+/*选择事件多选框*/
+#eventName{
+    border: 1px solid #707070 !important;
+    height: 36px !important;
+    line-height: 36px !important;
+    background: #202020 !important;
+    color: #999999 !important;
+    font-size: 14px !important;
+    margin-left: 2% !important;
+    text-align: center !important;
+}
+.eventSelect>.multiselect-native-select>.multiselect-native-select>.btn-group>button {
+    border-color: #707070 !important;
+    height: 35px;
+    line-height: 35px;
+    color: #999999;
+    font-size: 14px;
+    text-align: center;
+    margin-left: 15.4% !important;
+    margin-top: -6%;
+}
+.eventSelect>.multiselect-native-select>.multiselect-native-select>.btn-group>.multiselect-container{
+    width: 100%;
+    border: 1px solid #707070;
+    border-radius: 0;
+    margin-top: 1%;
+    background-color: #202020;
+    padding-left: 35%;
+}
+.eventSelect>.multiselect-native-select>.multiselect-native-select>.btn-group>.dropdown-menu>.active>a{
+    background-color: #202020 ;
+}
+.eventSelect>.multiselect-native-select>.multiselect-native-select>.btn-group>.multiselect-container>li>a>label.checkbox:hover{
+    background-color: #202020 !important;
+}
+.eventSelect>.multiselect-native-select>.multiselect-native-select>.btn-group>.multiselect-container>li>a.multiselect-all label{
+    font-weight: 400;
+}
+.multiselect-container>li>a.multiselect-all label{
+    font-weight: 400;
+}
+.radio:hover{
+    background: #202020 !important;
+}
+.multiselect-container>li>a>label.checkbox, .multiselect-container>li>a>label.radio {
+    background: #202020;
+    font-size: 14px !important;
+}
+.btn-default {
+    background: transparent;
+    color: #999999 !important;
+    border: 1px solid #707070 !important;
+    height: 35px;
+    margin-left: 15.4% !important;
+    margin-top: -5.5%;
+}
+.multiselect-container {
+    border: 1px solid #707070;
+    margin-top: 1%;
+    border-radius: 0;
+    width: 100%;
+    padding-left: 40%;
+    background: #202020;
+}
+/*选择事件多选框样式结束*/
+/*修改自定义事件*/
+#modifyName{
+    border: 1px solid #707070;
+    width: 68.2%;
+    height: 36px;
+    line-height: 36px;
+    background: #202020;
+    color: #999999;
+    font-size: 14px;
+    text-align: center;
+}
+
+#cusEvent{
+    border: 1px solid #707070 !important;
+    height: 36px !important;
+    line-height: 36px !important;
+    background: #202020 !important;
+    color: #999999 !important;
+    font-size: 14px !important;
+    margin-left: 2% !important;
+    text-align: center !important;
+}
+/**/
+.namelist{
+    font-size: 14px;
+    cursor: pointer;
+}
+.activeTT,.activeFir{
+    color:#ffffff;
+    font-size:16px;
+}
+#table{
+    overflow: hidden;
+}
+/*!* 全局滚动条样式 *!*/
+/*.scrollable {*/
+    /*-webkit-overflow-scrolling: touch;*/
+/*}*/
+/*::-webkit-scrollbar {*/
+    /*width: 10px;*/
+    /*height: 8px;*/
+/*}*/
+/*::-webkit-scrollbar-thumb {*/
+    /*background-color:#121212;*/
+/*}*/
+/*::-webkit-scrollbar-thumb:hover {*/
+    /*background-color: rgba(50, 50, 50, 1);*/
+/*}*/
+/*::-webkit-scrollbar-track {*/
+    /*background-color: rgba(50, 50, 50, 1);*/
+/*}*/
+/*::-webkit-scrollbar-track:hover {*/
+    /*background-color: rgba(50, 50, 50, 1);*/
+/*}*/
+.pagination{
+    float: right !important;
+}
+.pagination-detail{
+    float: left !important;
+    width:25% !important;
+}
+.page-list{
+    display: inline-block !important;
+    width: 30% !important;
+}

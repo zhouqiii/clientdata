@@ -1,0 +1,476 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/element-ui/2.12.0/theme-chalk/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://heerey525.github.io/layui-v2.4.3/layui-v2.4.5/css/layui.css">
+    <script src="https://heerey525.github.io/layui-v2.4.3/layui-v2.4.5/layui.js"></script>
+
+    <style type="text/css">
+        body{
+            margin: 0 auto;
+            background-color:#f3f3f4;
+        }
+        .left{
+            min-width: 170px ;
+            width: 10.5%;
+            height: 100%;
+            background:#121212 ;
+            position: fixed;
+            margin-top: 59px;
+        }
+        .nav{
+            width: 100%;
+        }
+        .right{
+            width: 89.5%;
+            float:right;
+            background: #363636;
+        }
+        .el-submenu .el-menu-item{
+            min-width: auto !important;
+        }
+        .el-menu-item.is-active{
+            background-color: #202020 !important;
+            color: #ffffff !important;
+        }
+        .el-menu-item:hover{
+            background-color:  #202020 !important;
+        }
+        .el-submenu__title:hover{
+            background-color:  #202020 !important;
+        }
+        .el-submenu.is-active.is-opened{
+            background-color: #363636 !important;
+        }
+        .el-menu.el-menu--inline{
+            background-color: #363636 !important;
+        }
+        a{
+            text-decoration:none;
+            color:white !important;
+        }
+        a:hover{
+            text-decoration:none;
+        }
+        .el-menu-item-group__title{
+            display: none;
+        }
+        .layui-nav .layui-nav-item a{
+            padding: 0 !important;
+        }
+        .topTag{
+            color: #fff;
+            height: 60px;
+            line-height: 60px;
+            font-size: 20px;
+            font-weight: 300;
+            background:#121212 ;
+            padding-left: 2%;
+        }
+        .cancelbtn{
+            line-height: 32px;
+            font-size: 14px;
+            height: 32px;
+            border-radius: 22px;
+            text-align: center;
+            width: 150px;
+            float:right;
+        }
+        .el-menu{
+            border:none !important;
+        }
+        .laydate-btns-clear,.laydate-btns-confirm{
+            color:white;
+        }
+        .layui-laydate-content td.laydate-selected{
+            background:#4a2cf8 !important;
+        }
+        /*.layui-laydate-main {*/
+        /*width: 240px !important;*/
+        /*}*/
+        /*.layui-laydate-range {*/
+        /*width: 485px !important;*/
+        /*}*/
+        .highcharts-root{
+            padding-left:20px !important;
+            padding-right:40px !important;
+        }
+        .layui-nav{
+            background-color: #121212 !important;
+            width: 200px;
+            padding: 0 !important;
+        }
+        .layui-nav-item{
+            position: fixed;
+        }
+        .layui-nav .layui-nav-more {
+            top:65% !important;
+        }
+        .layui-nav-bar{
+            background-color: #121212 !important;
+        }
+        .layui-nav-child{
+
+            min-width: 80% !important;
+            border-radius: 4px !important;
+        }
+        .triangle-up {
+            position: absolute;
+            left: 40%;
+            top: -20%;
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 7px solid transparent;
+            border-bottom: 10px solid white;
+        }
+        .exitIn:hover .kkk{
+            color:#2953FF !important;
+        }
+        @media screen and (max-width: 1385px) {
+            .topTag{
+                font-size:18px;
+            }
+
+        }
+        .left{
+
+            height:100%;
+            overflow-y:auto;
+            padding-bottom:10%;
+        }
+        .left::-webkit-scrollbar{
+            display: none;
+        }
+    </style>
+</head>
+<body style="background: #363636">
+<div class="content">
+    <div style="width: 100%;position: fixed; height: 60px;line-height: 60px;z-index:10000;max-height:60px;background: #121212;">
+        <div class="topTag" style="width: 26%;float:left;min-width:170px;">
+            <img src="../image/nav-logo.png" onclick="backtoIndex()" style="cursor: pointer">
+        </div>
+        <div style="float: right;margin-right: 2%;height: 75px;width: 120px;" id="changett" onmouseover="fun()" onmouseout="functionout()">
+            <ul class="layui-nav" lay-filter="">
+                <li class="layui-nav-item">
+                    <a href="javascript:void(0);" class="cancelbtn" style="margin-top: 12px;margin-right: -10%;text-decoration:none;" id="quit" >
+                        <img src="../image/联系人.png" style="margin-bottom: 8px;width: 16px">
+                        <span id="nameShow" style="font-size: 13px;color: white;margin-left: 10px;">admin</span>
+                        <span class="layui-nav-more" id="tabtabs"></span>
+                    </a>
+                    <dl class="layui-nav-child" style="display: none;margin-left:20%;padding-left:5%;margin-top: -4%"> <!-- 二级菜单 -->
+                        <div class="triangle-up"></div>
+                        <dd style="padding-bottom: 10px">
+                            <a href="javascript:void(0)" class="exitIn" onclick="toHeroEye()" style="text-decoration:none;" onmouseover="document.images['heroeye'].src='../image/yunwei.png'"
+                               onmouseout="document.images['heroeye'].src='../image/yunwei.png'">
+                                <img alt="heroeye" id="heroeye" src="../image/yunwei.png" style="vertical-align: bottom;height: 19px;" />
+                                <span style="margin-left: 5px;font-size: 15px;color:black;opacity: .8;" class="kkk">运维平台</span>
+                            </a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:void(0)" class="exitIn" onclick="playout()" style="text-decoration:none;" onmouseover="document.images['arrow'].src='../image/userH.png'"
+                               onmouseout="document.images['arrow'].src='../image/user.png'">
+                                <img alt="arrow" id="arrow" src="../image/user.png" style="vertical-align: bottom" />
+                                <span style="margin-left: 5px;font-size: 15px;color:black;opacity: .8;" class="kkk">退出登录</span>
+                            </a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+        <div style="cursor: pointer;float: right;color: #2953FF;font-size: 14px" onclick="jumpto()" class="jumptot">体验版</div>
+    </div>
+    <div class="left" style="z-index:10000">
+        <el-row class="tac" >
+            <el-col class="nav">
+                <el-menu :default-active="defaultActive" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" background-color="#121212" text-color="#fff" active-text-color="#202020" unique-opened="true">
+                    <el-submenu index="11">
+                        <template slot="title">
+                            <img src="../image/ih.png"/>
+                            <span>综合分析</span>
+                        </template>
+                        <el-menu-item-group>
+                            <el-menu-item index="1" @click="scap()">总览趋势</el-menu-item>
+                            <el-menu-item index="2" @click="scapTwo()">实时统计</el-menu-item>
+                            <el-menu-item index="4" @click="scapRetention()">留存分析</el-menu-item>
+                            <el-menu-item index="9" @click="scapincome()">付费分析</el-menu-item>
+                            <el-menu-item index="8" @click="scapLTV()">LTV分析</el-menu-item>
+                            <el-menu-item index="3" @click="scapDaily()">日报分析</el-menu-item>
+                            <el-menu-item index="5" @click="scapClientData()">启动分析</el-menu-item>
+                            <el-menu-item index="6" @click="scapClientConfig()">配置型号</el-menu-item>
+                            <el-menu-item index="7" @click="scapClientCollapse()">崩溃分析</el-menu-item>
+                            <el-menu-item index="1-10" @click="scapEvent()">事件分析</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                    <el-submenu index="22" >
+                        <template slot="title">
+                            <img src="../image/iy.png"/>
+                            <span>详细日志</span>
+                        </template>
+                        <el-menu-item-group>
+                            <el-menu-item index="1-11" @click="scapData()">留存在线对局分析</el-menu-item>
+                            <el-menu-item index="24" @click="Operate()">运营渠道导入数据</el-menu-item>
+                            <el-menu-item index="1-1" @click="login()">登录登出日志</el-menu-item>
+                            <el-menu-item index="2-1" @click="inning()">首登首局日志</el-menu-item>
+                            <el-menu-item index="3-1" @click="Account()">创建账号日志</el-menu-item>
+                            <el-menu-item index="4-1" @click="beetroom()">单排模式房间日志</el-menu-item>
+                            <el-menu-item index="5-1" @click="player()">单排模式玩家日志</el-menu-item>
+                            <el-menu-item index="6-1" @click="singleRow()"> 单排战斗结算日志（一）</el-menu-item>
+                            <el-menu-item index="7-1" @click="singleTwo()">单排战斗结算日志（二）</el-menu-item>
+                            <el-menu-item index="8-1" @click="fromteam()">组排模式房间日志</el-menu-item>
+                            <el-menu-item index="9-1" @click="fromteamfist()">组排模式玩家日志</el-menu-item>
+                            <el-menu-item index="10-1" @click="fromteamtwo()">组排战斗结算日志（一）</el-menu-item>
+                            <el-menu-item index="16"  @click="doctot()">组排战斗结算日志（二）</el-menu-item>
+                            <el-menu-item index="12-1" @click="novice()">新手指导日志</el-menu-item>
+                            <el-menu-item index="13" @click="beat()">心跳日志</el-menu-item>
+                            <el-menu-item index="14" @click="position()">有效账号对局统计</el-menu-item>
+                            <el-menu-item index="15" @click="analyze()">房间分析</el-menu-item>
+                            <el-menu-item index="20" @click="dengluloag()">首登数据分析</el-menu-item>
+                            <el-menu-item index="17" @click="yingchangloag()">异常用户列表</el-menu-item>
+                            <el-menu-item index="18" @click="shoudengying()">首登英雄分析</el-menu-item>
+                            <el-menu-item index="19" @click="wangjialoag()">玩家综合行为分析</el-menu-item>
+                            <el-menu-item index="21" @click="Analyzedetaild()">细分数据分析（一）</el-menu-item>
+                            <el-menu-item index="23" @click="particulars()">细分数据分析（二）</el-menu-item>
+                            <el-menu-item index="22" @click="queryNewbieLevel()">新手关日志</el-menu-item>
+                            <el-menu-item index="25" @click="Corekeyoperation()">核心按键操作</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                </el-menu>
+            </el-col>
+        </el-row>
+    </div>
+    <div class="right">
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdn.bootcss.com/element-ui/2.12.0/index.js"></script>
+<script src="../js/cookie.js"></script>
+<script>
+    var vm=new Vue({
+        el:'.content',
+        data:{
+            msg:'hello',
+            defaultActive:'1',
+            // indexTo:[]
+        },
+        methods: {
+            handleOpen(key, keyPath) {
+                // console.log(key, keyPath);
+            },
+            handleClose(key, keyPath) {
+                console.log(key, keyPath);
+            },
+        }
+    })
+    function functionout() {
+        var ppp=document.getElementById('tabtabs')
+        ppp.className='layui-nav-more'
+        $('.layui-nav-child').css('display','none')
+    }
+    function fun() {
+        var ppp=document.getElementById('tabtabs')
+        ppp.className='layui-nav-more layui-nav-mored'
+        $('.layui-nav-child').css('display','block')
+    }
+    function backtoIndex(){
+        window.location.href = "http://center.umi-game.cn/view/index.html";
+    }
+    function login(){
+        localStorage.setItem('navigation','1-1')
+        window.location.href = "fighting.html";
+    }
+    function inning(){
+        localStorage.setItem('navigation','2-1')
+        window.location.href = "shiyan.html";
+    }
+    function Account(){
+        localStorage.setItem('navigation','3-1')
+        window.location.href = "creat-roletwo.html";
+    }
+    function beetroom(){
+        localStorage.setItem('navigation','4-1')
+        window.location.href = "singlerowr-room.html";
+    }
+    function player(){
+        localStorage.setItem('navigation','5-1')
+        window.location.href = "singlerow-player.html";
+    }
+    function singleRow(){
+        localStorage.setItem('navigation','6-1')
+        window.location.href = "combatsettle-ment.html";
+    }
+    function singleTwo(){
+        localStorage.setItem('navigation','7-1')
+        window.location.href = "faghtingTwo.html";
+    }
+    function fromteam(){
+        localStorage.setItem('navigation','8-1')
+        window.location.href = "group-combasettlement.html";
+    }
+    function fromteamfist(){
+        localStorage.setItem('navigation','9-1')
+        window.location.href = "playerAnchorGroup-mode.html";
+    }
+    function fromteamtwo(){
+        localStorage.setItem('navigation','10-1')
+        window.location.href = "Group-combastettle-ment.html";
+    }
+    function doctot(){
+        localStorage.setItem('navigation','16')
+        window.location.href = "group-fightingTwo.html";
+    }
+    function novice(){
+        localStorage.setItem('navigation','12-1')
+        window.location.href = "novice-guidance.html";
+    }
+    function beat(){
+        localStorage.setItem('navigation','13')
+        window.location.href = "heart-beat.html";
+    }
+    function position(){
+        localStorage.setItem('navigation','14')
+        window.location.href = "accounn-umber.html";
+    }
+    function  analyze(){
+        localStorage.setItem('navigation','15')
+        window.location.href = "home.html";
+    }
+    function  dengluloag(){
+        localStorage.setItem('navigation','20')
+        window.location.href = "firstdata-Analysis.html";
+    }
+    function  yingchangloag(){
+        localStorage.setItem('navigation','17')
+        window.location.href = "Abnormal-data.html";
+    }
+    function  shoudengying(){
+        localStorage.setItem('navigation','18')
+        window.location.href = "firstLogin-Hero.html";
+    }
+    function  wangjialoag(){
+        localStorage.setItem('navigation','19')
+        window.location.href = "GamePlayer-Data.html";
+    }
+    function  Analyzedetaild(){
+        localStorage.setItem('navigation','21')
+        window.location.href = "Analyzedetailed-data.html";
+    }
+    function  queryNewbieLevel(){
+        localStorage.setItem('navigation','22')
+        window.location.href = "newbieLevel.html";
+    }
+    function  particulars(){
+        localStorage.setItem('navigation','23')
+        window.location.href = "particulars.html";
+    }
+    function  Operate(){
+        localStorage.setItem('navigation','24')
+        window.location.href = "Operate.html";
+    }
+    function  Corekeyoperation(){
+        localStorage.setItem('navigation','25')
+        window.location.href = "Corekeyoperation.html";
+    }
+
+    islog()
+
+    function islog() {
+        $.ajax({
+            type: "get",
+            url: "../isLogin.action",
+            async: true,
+            success: function(e) {
+                // if(e.state == false) {
+                // 	alert(e.message)
+                // 	window.location.href = "login.html"
+                // }
+            }
+        });
+    }
+
+    var navigationDate=localStorage.getItem('navigation')
+    if(navigationDate){
+        vm.defaultActive = navigationDate
+        // localStorage.removeItem("navigation")
+    }
+    function scap() {
+        localStorage.setItem('navigation','1')
+        window.location.href = "../view/realAll.html";
+    }
+    function scapTwo() {
+        localStorage.setItem('navigation','2')
+        if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+            window.location.href = "../mobile/realTimeMobile.html";
+        } else {
+            window.location.href = "../view/realTime.html";
+        }
+    }
+    function scapDaily(){
+        localStorage.setItem('navigation','3')
+        window.location.href = "../view/dailynew.html";
+    }
+    function scapClientData() {
+        localStorage.setItem('navigation','5')
+        window.location.href = "../view/clientData.html";
+    }
+    function scapRetention() {
+        localStorage.setItem('navigation','4')
+        window.location.href = "../view/retention.html";
+    }
+    function scapClientConfig() {
+        localStorage.setItem('navigation','6')
+        window.location.href = "../view/clientConfig.html";
+    }
+    function scapClientCollapse(){
+        localStorage.setItem('navigation','7')
+        window.location.href = "../view/clientCollapseTwo.html";
+    }
+    function scapLTV(){
+        localStorage.setItem('navigation','8')
+        window.location.href = "../view/LTV.html";
+    }
+    function scapincome() {
+        localStorage.setItem('navigation','9')
+        window.location.href = "../view/income.html";
+    }
+    function scaphaddup(){
+        localStorage.setItem('navigation','10')
+        window.location.href = "../view/haddupReal.html";
+    }
+    function scapEvent(){
+        localStorage.setItem('navigation','1-10')
+        window.location.href = "../view/eventAnalysis.html";
+    }
+    function scapData() {
+        localStorage.setItem('navigation','1-11')
+        window.location.href = "../view/dataAnalysis.html";
+    }
+    function jumpto() {
+        window.location.href = "../haddup/haddupOverview.html";
+    }
+    function toHeroEye() {
+        window.location.href = "http://center.umi-game.cn:9300/view/upServerOverview.html";
+    }
+    function playout() {
+        $.ajax({
+            type: "get",
+            url: "../PlayOut.action",
+            async: true,
+            success: function(e) {
+                alert(e.message)
+                // clearCookie("userName");
+                // clearCookie("userCode");
+                // clearCookie("userPass");
+                // clearCookie("user");
+                // clearCookie("productType");
+                window.close()
+                window.location.href="http://center.umi-game.cn/view/index.html"
+            }
+        });
+    }
+    var username = $.cookie("userCode");
+    $("#nameShow").text(username);
+</script>
+</html>

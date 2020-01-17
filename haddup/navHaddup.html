@@ -1,0 +1,313 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://heerey525.github.io/layui-v2.4.3/layui-v2.4.5/css/layui.css">
+    <link href="https://cdn.bootcss.com/element-ui/2.12.0/theme-chalk/index.css" rel="stylesheet">
+    <script src="https://heerey525.github.io/layui-v2.4.3/layui-v2.4.5/layui.js"></script>
+    <style type="text/css">
+        body{
+            margin: 0 auto;
+            background-color:#f3f3f4;
+        }
+        .left{
+            min-width: 170px ;
+            width: 10.5%;
+            height: 100%;
+            background:#121212 ;
+            position: fixed;
+            margin-top: 59px;
+        }
+        .nav{
+            width: 100%;
+        }
+        .right{
+            width: 89.5%;
+            float:right;
+            background: #363636;
+        }
+        .el-submenu .el-menu-item{
+            min-width: auto !important;
+        }
+        .el-menu-item.is-active{
+            background-color: #202020 !important;
+            color: #ffffff !important;
+        }
+        .el-menu-item:hover{
+            background-color:  #202020 !important;
+        }
+        .el-submenu__title:hover{
+            background-color:  #202020 !important;
+        }
+        .el-submenu.is-active.is-opened{
+            background-color: #363636 !important;
+        }
+        .el-menu.el-menu--inline{
+            background-color: #363636 !important;
+        }
+        a{
+            text-decoration:none;
+            color:white !important;
+        }
+        a:hover{
+            text-decoration:none;
+        }
+        .el-menu-item-group__title{
+            display: none;
+        }
+        .topTag{
+            color: #fff;
+            height: 60px;
+            line-height: 60px;
+            font-size: 20px;
+            font-weight: 300;
+            background:#121212 ;
+            padding-left: 2%;
+        }
+        .cancelbtn{
+            line-height: 32px;
+            font-size: 14px;
+            height: 32px;
+            border-radius: 22px;
+            text-align: center;
+            width: 150px;
+            float:right;
+        }
+        .el-menu{
+            border:none !important;
+        }
+        .laydate-btns-clear,.laydate-btns-confirm{
+            color:white;
+        }
+        .layui-laydate-content td.laydate-selected{
+            background:#4a2cf8 !important;
+        }
+        /*.layui-laydate-main {*/
+        /*width: 240px !important;*/
+        /*}*/
+        /*.layui-laydate-range {*/
+        /*width: 485px !important;*/
+        /*}*/
+        .highcharts-root{
+            padding-left:20px !important;
+            padding-right:40px !important;
+        }
+        .layui-nav .layui-nav-item a{
+            padding: 0 !important;
+        }
+        .layui-nav{
+            background-color: #121212 !important;
+            width: 200px;
+            padding: 0 !important;
+        }
+        .layui-nav-item{
+            position: fixed;
+        }
+        .layui-nav .layui-nav-more {
+            top:65% !important;
+        }
+        .layui-nav-bar{
+            background-color: #121212 !important;
+        }
+        .layui-nav-child{
+
+            min-width: 80% !important;
+            border-radius: 4px !important;
+        }
+        .triangle-up {
+            position: absolute;
+            left: 40%;
+            top: -20%;
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 7px solid transparent;
+            border-bottom: 10px solid white;
+        }
+        .exitIn:hover .kkk{
+            color:#2953FF !important;
+        }
+        @media screen and (max-width: 1385px) {
+            .topTag{
+                font-size:18px;
+            }
+
+        }
+        .left{
+
+            height:100%;
+            overflow-y:auto;
+            padding-bottom:10%;
+        }
+        .left::-webkit-scrollbar{
+            display: none;
+        }
+    </style>
+</head>
+<body style="background: #363636">
+<div class="content">
+    <div style="width: 100%;position: fixed; height: 60px;line-height: 60px;z-index:10000;max-height:60px;background: #121212;">
+        <div class="topTag" style="width: 26%;float:left;min-width:170px;">
+            <img src="../image/nav-logo.png" onclick="backtoIndex()" style="cursor: pointer">
+        </div>
+
+        <div style="float: right;margin-right: 2%;height: 75px;width: 120px;" id="changett" onmouseover="fun()" onmouseout="functionout()">
+            <ul class="layui-nav" lay-filter="">
+                <li class="layui-nav-item">
+                    <a href="javascript:void(0);" class="cancelbtn" style="margin-top: 12px;margin-right: -10%;text-decoration:none;" id="quit" >
+                        <img src="../image/联系人.png" style="margin-bottom: 8px;width: 16px">
+                        <span id="nameShow" style="font-size: 13px;color: white;margin-left: 10px;">admin</span>
+                        <span class="layui-nav-more" id="tabtabs"></span>
+                    </a>
+                    <dl class="layui-nav-child" style="display: none;margin-left:20%;padding-left:5%;margin-top: -4%"> <!-- 二级菜单 -->
+                        <div class="triangle-up"></div>
+                        <dd style="padding-bottom: 10px">
+                            <a href="javascript:void(0)" class="exitIn" onclick="toHeroEye()" style="text-decoration:none;" onmouseover="document.images['heroeye'].src='../image/yunwei.png'"
+                               onmouseout="document.images['heroeye'].src='../image/yunwei.png'">
+                                <img alt="heroeye" id="heroeye" src="../image/yunwei.png" style="vertical-align: bottom;height: 19px;" />
+                                <span style="margin-left: 5px;font-size: 15px;color:black;opacity: .8;" class="kkk">运维平台</span>
+                            </a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:void(0)" class="exitIn" onclick="playout()" style="text-decoration:none;" onmouseover="document.images['arrow'].src='../image/userH.png'"
+                               onmouseout="document.images['arrow'].src='../image/user.png'">
+                                <img alt="arrow" id="arrow" src="../image/user.png" style="vertical-align: bottom" />
+                                <span style="margin-left: 5px;font-size: 15px;color:black;opacity: .8;" class="kkk">退出登录</span>
+                            </a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+        <div style="cursor: pointer;float: right;color: #2953FF;font-size: 14px" onclick="jumpto()" class="jumptot">正式版</div>
+    </div>
+    <div class="left" style="z-index:10000">
+        <el-row class="tac" >
+            <el-col class="nav">
+                <el-menu :default-active="defaultActive" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" background-color="#121212" text-color="#fff" active-text-color="#202020" unique-opened="true">
+                    <el-submenu index="6-6">
+                        <template slot="title">
+                            <img src="../image/ih.png"/>
+                            <span>综合分析</span>
+                        </template>
+                        <el-menu-item-group>
+                            <el-menu-item index="6-6-1" @click="haddupOverview()">总览趋势</el-menu-item>
+                            <el-menu-item index="6-6-7" @click="haddupRetention()">留存分析</el-menu-item>
+                            <el-menu-item index="6-6-2" @click="haddupReal()">日报分析</el-menu-item>
+                            <el-menu-item index="6-6-3" @click="haddupStart()">启动分析</el-menu-item>
+                            <el-menu-item index="6-6-4" @click="haddupConfig()">配置型号</el-menu-item>
+                            <el-menu-item index="6-6-5" @click="haddupCollapse()">崩溃分析</el-menu-item>
+                            <el-menu-item index="6-6-6" @click="scapEvent()">事件分析</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                </el-menu>
+            </el-col>
+        </el-row>
+    </div>
+    <div class="right">
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdn.bootcss.com/element-ui/2.12.0/index.js"></script>
+<script src="../js/cookie.js"></script>
+<script>
+    var vm=new Vue({
+        el:'.content',
+        data:{
+            msg:'hello',
+            defaultActive:'6-6-1',
+            // indexTo:[]
+        },
+        methods: {
+            handleOpen(key, keyPath) {
+                // console.log(key, keyPath);
+            },
+            handleClose(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            // alertFun(){
+            //     alert(1111)
+            // }
+        }
+    })
+    function functionout() {
+        var ppp=document.getElementById('tabtabs')
+        ppp.className='layui-nav-more'
+        $('.layui-nav-child').css('display','none')
+    }
+    function fun() {
+        var ppp=document.getElementById('tabtabs')
+        ppp.className='layui-nav-more layui-nav-mored'
+        $('.layui-nav-child').css('display','block')
+    }
+    function backtoIndex(){
+        window.location.href = "http://center.umi-game.cn/view/index.html";
+    }
+    function haddupOverview() {
+        localStorage.setItem('navigation','6-6-1')
+        window.location.href = "haddupOverview.html";
+    }
+    function haddupReal() {
+        localStorage.setItem('navigation','6-6-2')
+        window.location.href = "haddupReal.html";
+    }
+    function  haddupStart(){
+        localStorage.setItem('navigation','6-6-3')
+        window.location.href = "haddupStart.html";
+    }
+    function  haddupConfig(){
+        localStorage.setItem('navigation','6-6-4')
+        window.location.href = "haddupConfig.html";
+    }
+    function  haddupCollapse(){
+        localStorage.setItem('navigation','6-6-5')
+        window.location.href = "haddupCollapse.html";
+    }
+    function scapEvent(){
+        localStorage.setItem('navigation','6-6-6')
+        window.location.href = "eventAnalysis.html";
+    }
+    function haddupRetention(){
+        localStorage.setItem('navigation','6-6-7')
+        window.location.href = "haddupRetention.html";
+    }
+    islog()
+
+    function islog() {
+        $.ajax({
+            type: "get",
+            url: "../isLogin.action",
+            async: true,
+            success: function(e) {
+                // if(e.state == false) {
+                // 	alert(e.message)
+                // 	window.location.href = "login.html"
+                // }
+            }
+        });
+    }
+
+    var navigationDate=localStorage.getItem('navigation')
+    if(navigationDate){
+        vm.defaultActive = navigationDate
+    }
+    function jumpto() {
+        window.location.href = "../view/realAll.html";
+    }
+    function playout() {
+        $.ajax({
+            type: "get",
+            url: "../PlayOut.action",
+            async: true,
+            success: function(e) {
+                alert(e.message)
+                window.open("login.html")
+                window.close()
+            }
+        });
+    }
+    var userName=document.getElementById('nameShow').innerText
+    addCookie("userName", json, 8, "/")
+</script>
+</html>

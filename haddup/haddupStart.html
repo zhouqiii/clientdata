@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="content-type" content="text/html" charset="utf-8">
-	<title>前端实时</title>
+	<title>启动分析</title>
 	<!-- Bootstrap Styles-->
 	<link href="../css/bootstrap.min.css" rel="stylesheet" />
 	<script src="../js/jquery.min.js"></script>
@@ -121,12 +121,12 @@
 			</div>
 			<div>
 				<div class="partFour" style="margin-top: 1%;min-width:1650px;float: left;width: 100%">
-					<div style="width: 49%;display: inline;background: #363636" class="partfourone">
+					<div style="width: 49%;display: inline;background: #363636">
 						<div class="titleLoadAdd" style="width: 822px;height: 430px;border: 1px solid #707070;font-size: 12px;float: left;padding-top: 1%;text-align: center;color:#ffffff;padding-top: 5%" id="loadip"><i class="el-icon-loading" style="font-size: 28px;vertical-align: middle;"></i><div style="margin-top: 5px">加载中...</div></div>
 						<div id="partFourLeft" style="width: 822px;height: 430px;border: 1px solid #707070;"></div>
 					</div>
 					<div class="inner" style="display: none"></div>
-					<div style="display: inline;width: 49%;background: #363636" class="partfourone">
+					<div style="display: inline;width: 49%;background: #363636">
 						<div class="titleLoadAdd" style="width: 828px;height: 430px;margin-left:.6%;float: right;border: 1px solid #707070;font-size: 12px;float: left;padding-top: 1%;text-align: center;color:#ffffff;padding-top: 5%" id="loadnet"><i class="el-icon-loading" style="font-size: 28px;vertical-align: middle;"></i><div style="margin-top: 5px">加载中...</div></div>
 						<div id="partFiveRight" style="width: 828px;height: 430px;margin-right:-.6%;float: right;margin-top:-430px;border: 1px solid #707070;"></div>
 					</div>
@@ -150,7 +150,8 @@
 <script src="../js/bootstrap-table/bootstrap-table.min.js"></script>
 <script src="../js/jquery.table2excel.js"></script>
 <script type="text/javascript">
-    $('#navigation').load('tagtag.html')
+    $('#navigation').load('navHaddup.html')
+    // window.localStorage.clear()
     var vm=new Vue({
         el:'#page-inner',
         data:{
@@ -183,7 +184,7 @@
                         onClick(picker) {
                             var end = new Date();
                             var start = new Date();
-                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 *7);
                             end.setTime(end.getTime() - 3600 * 1000 * 24 );
                             picker.$emit('pick', [start, end]);
                         }

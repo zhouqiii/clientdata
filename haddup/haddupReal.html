@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html" charset="utf-8">
+    <title>日报分析</title>
+    <!-- Bootstrap Styles-->
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <link href="https://cdn.bootcss.com/element-ui/2.12.0/theme-chalk/index.css" rel="stylesheet">
+    <!--bs multiselect  -->
+    <script src="../js/multiple/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet" href="../js/multiple/bootstrap-multiselect.css" />
+    <link rel="stylesheet" type="text/css" href="../css/animate.min.css"/>
+    <!-- FontAwesome Styles-->
+    <link href="../css/font-awesome.css" rel="stylesheet" />
+    <!-- Morris Chart Styles-->
+    <link href="../js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="../css/dailynew.css" />
+    <link rel="stylesheet" href="../js/bootstrap-table/bootstrap-table.css" />
+    <script src="../js/bootstrap-table/bootstrap-table.min.js"></script>
+    <link rel="stylesheet" href="../laydate-master/src/theme/default/laydate.css" />
+    <link rel="stylesheet" href="../js/loading/jquery.mloading.css" />
+    <script src="../js/loading/jquery.mloading.js"></script>
+    <style type="text/css">
+        .help{
+            width: 15px;
+            height: 15px;
+            float: right;
+            margin-right: 1%;
+        }
+        .helpDescription{
+            display: none;
+            position: absolute;
+            margin-left: 68%;
+            margin-top: 1%;
+            z-index: 100;
+        }
+
+        .father:hover .helpDescription{display: block}
+
+    </style>
+</head>
+<body style="background: #202020;" class="bodyContent">
+<div id="wrapper" style="background:#202020">
+    <!-- main结构-->
+    <div id="navigation"></div>
+    <div id="page-wrapper" style="overflow-x: hidden;">
+        <div id="page-inner" class="classpageinner" style="min-height: 1020px;color: white;">
+            <div class="form-group col-xs-12" style="float: left;margin-bottom: 20px;width:100%;margin-top:5%;border: 1px solid #707070" id="dangerLine">
+                <div class="col-xs-3 col-sm-3 col-xs-3" style="margin-top: 1%;width:400px;" id="serverCos">
+                    <div class="myown">
+                        <label style="font-weight:400;font-size: 14px;float:left;margin-right:2%;margin-top:6px" class="lableServer" >区服&nbsp;</label>
+                        <select name="district" multiple="multiple" size="5" id="district" style=" border-radius: 0; width: 251px;height: 30px;display: none" class="form-control">
+                        </select>
+                    </div>
+                </div>
+                <!--<div class="col-xs-3 col-sm-3 col-xs-3" style="margin-top: 1%;width:400px;" >
+                    <div class="myown">
+                        <label style="font-weight:400;font-size: 14px;float:left;margin-top:6px" class="lableServer" >渠道号&nbsp;</label>
+                        <select name="district" multiple="multiple" size="5" id="channel" style=" border-radius: 0; width: 251px;height: 30px;display: none" class="form-control">
+                        </select>
+                    </div>
+                </div>-->
+                <div class="form-group col-xs-3 col-xs-pull-0" id="data_5"style="margin-top:1.1%;width: 20%">
+                    <div style="font-size:14px" class="timeTime">
+                        日期&nbsp; <el-date-picker
+                            class="timePick"
+                            value-format="yyyy-MM-dd"
+                            v-model="ruleForm.dateValue"
+                            type="daterange"
+                            align="bottom"
+                            unlink-panels
+                            range-separator="~"
+                            start-placeholder="开始日期"
+                            end-placeholder="结束日期"
+                            :picker-options="pickerOptions">
+                    </el-date-picker>
+                    </div>
+
+                </div>
+                <button type="button" id="cha" class="btn" onclick="onblu()">查询</button>
+            </div>
+            <!--<div id="real-inner" style="float: left;width: 100%">-->
+            <!--<div id="div-one" style="width: 100%"></div>-->
+            <!--</div>-->
+            <div style="float: left;text-align:center;width: 100%;margin-bottom: 2%;padding: 1%;margin-top: 1%;border:1px solid #707070;">
+                <div class="real-table-All">
+                    <div>
+                        <div>
+                            <i style="background: url('../image/exp2.png')" class="real-btnAll"></i>
+                            <div class="father">
+                                <div class="helpDescription">
+                                    <table style="border-radius: 4px;">
+                                        <tr style="height: 30px;line-height: 30px">
+                                            <td colspan="8" style="background: #121212;padding-left: 3px;text-align: left">日报说明</td>
+                                        </tr>
+                                        <tr style="height: 30px;line-height: 30px;background: #1B1B1B">
+                                            <td colspan="1" style="padding-left: 3px">日报数据</td>
+                                            <td colspan="7" style="padding-left: 15px;color: #A4A3AE;">每天00:05生成日报数据</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <i style="background: url('../image/help2.png')" class="help"></i>
+                            </div>
+                        </div>
+                        <div class="titleLoadAdd" style="font-size: 12px;float: left;padding-top: 1%;margin-bottom:8%;margin-top:8%;margin-left:50%;text-align: center;color:#ffffff;" id="loadAdd"><i class="el-icon-loading" style="font-size: 28px;vertical-align: middle;"></i><div style="margin-top: 5px">加载中...</div></div>
+                        <table id="real-datatableAll" style="text-align: center;table-layout: fixed;">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdn.bootcss.com/element-ui/2.12.0/index.js"></script>
+<script src="../js/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="http://cdn.hcharts.cn/highcharts/6.1.1/highcharts.js"></script>
+<script src="../js/highcharts/exporting.js"></script>
+<script src="http://cdn.hcharts.cn/highcharts/6.1.1/modules/data.js"></script>
+<script src="../js/jquery.table2excel.js"></script>
+<script src="../laydate-master/src/laydate.js"></script>
+<script src="../haddup/js/haddupReal.js"></script>
+<script type="text/javascript">
+    $('#navigation').load('navHaddup.html')
+    var vm=new Vue({
+        el:'#data_5',
+        data:{
+            msg:'hello',
+            pickerOptions: {
+                disabledDate(time) {
+                    return time.getTime() > (Date.now() - 8.64e7);//如果没有后面的-8.64e7就是不可以选择今天的
+                },
+                shortcuts: [
+                    //     {
+                    //     text: '今日',
+                    //     onClick(picker) {
+                    //         var end = new Date();
+                    //         var start = new Date();
+                    //         start.setTime(start.getTime());
+                    //         picker.$emit('pick', [start, end]);
+                    //     }
+                    // },
+                    {
+                        text: '昨日',
+                        onClick(picker) {
+                            var end = new Date();
+                            var start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 );
+                            end.setTime(end.getTime() - 3600 * 1000 * 24 );
+                            picker.$emit('pick', [start, end]);
+                        }
+                    },{
+                        text: '近7日',
+                        onClick(picker) {
+                            var end = new Date();
+                            var start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                            end.setTime(end.getTime() - 3600 * 1000 * 24 );
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }, {
+                        text: '近30日',
+                        onClick(picker) {
+                            var end = new Date();
+                            var start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24*30 );
+                            end.setTime(end.getTime() - 3600 * 1000 * 24 );
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }, {
+                        text: '全部',
+                        onClick(picker) {
+                            var end = new Date();
+                            end.setTime(end.getTime() - 3600 * 1000 * 24);
+                            var start = new Date('2019-10-9 00:00:00');
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }]
+            },
+            ruleForm: { dateValue: "" },
+        },
+        computed: {
+            timeDefault() {
+                var date = new Date();
+                var oneweekdate = new Date(date-24*3600*1000);
+                var y = oneweekdate.getFullYear();
+                var m = oneweekdate.getMonth()+1;
+                var d = oneweekdate.getDate();
+                var formatwdate = y+'-'+m+'-'+d;
+                return formatwdate;
+            },
+            timeDefaultLast() {
+                var date = new Date();
+                var oneweekdate = new Date(date-30*24*3600*1000);
+                var y = oneweekdate.getFullYear();
+                var m = oneweekdate.getMonth()+1;
+                var d = oneweekdate.getDate();
+                var formatwdate = y+'-'+m+'-'+d;
+                return formatwdate;
+            }
+        },
+        mounted() {
+            // 初始化查询，默认为前一周
+            this.ruleForm.dateValue = [this.timeDefaultLast,this.timeDefault];
+        },
+        methods: {
+            handleOpen(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            handleClose(key, keyPath) {
+                console.log(key, keyPath);
+            },
+        }
+    })
+    window.setInterval(function () {
+        var monthtt=document.getElementsByClassName('el-icon-arrow-right')
+        var yeartt=document.getElementsByClassName('el-icon-d-arrow-right')
+        monthtt[0].disabled=false
+        monthtt[0].classList.remove("is-disabled");
+        yeartt[0].disabled=false
+        yeartt[0].classList.remove("is-disabled");
+    },400)
+    //付费金额
+    $(".real-btnAll").click(function(){
+        $("#real-datatableAll").table2excel({
+            exclude: ".noExl",
+            name: "Excel Document Name",
+            filename: "日报数据",
+            exclude_img: true,
+            exclude_links: true,
+            exclude_inputs: true,
+        });
+    });
+    var winWidth = 0,winHeight = 0;
+    function changebleWidthHeight() {
+        if (window.innerWidth)
+            winWidth = window.innerWidth;
+        else if ((document.body) && (document.body.clientWidth))
+            winWidth = document.body.clientWidth;
+//获取窗口高度
+        if (window.innerHeight)
+            winHeight = window.innerHeight;
+        else if ((document.body) && (document.body.clientHeight))
+            winHeight = document.body.clientHeight;
+//通过深入Document内部对body进行检测，获取窗口大小
+        if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth)
+        {
+            winHeight = document.documentElement.clientHeight;
+            winWidth = document.documentElement.clientWidth;
+        }
+
+        document.getElementById("serverCos").style.width = winWidth - 50
+        document.getElementById("data_5").style.width = winWidth - 40
+
+    }
+    window.onresize = changebleWidthHeight();
+
+
+</script>
+</body>
+
+</html>

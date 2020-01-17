@@ -5,22 +5,22 @@ width: 1280px;
 }
 /*媒体查询————针对大多数iPhone6的标准模式*/
 @media only screen and (min-device-width: 375px)and (-webkit-min-device-pixel-ratio: 2) {
-	#page-wrapper{
-		width: 77% !important;
-		overflow-x: hidden;
-	}
+	/*#page-wrapper{*/
+		/*width: 77% !important;*/
+		/*overflow-x: hidden;*/
+	/*}*/
 	#page-inner{
-		padding-left: 18% !important;
+		padding-left: 10% !important;
 	}
 	#serverCos{
 		width: 30% !important;
 	}
 	#data_5{
-		width: 50% !important;
+		width: 20% !important;
 	}
-	#dangerLine{
-		margin-top: 12% !important;
-	}
+	/*#dangerLine{*/
+		/*margin-top: 12% !important;*/
+	/*}*/
 	.el-picker-panel__body-wrapper {
 		background: white;
 		width: 150%;
@@ -32,11 +32,6 @@ width: 1280px;
 .el-date-table td.current span{
 	background-color: #4a2aff !important;
 }
-.el-input__inner{
-	background: #363636 !important;
-	color: #ffffff !important;
-	text-align: center !important;
-}
 .form-group{
 	margin-bottom: 10px ;
 }
@@ -45,9 +40,6 @@ width: 1280px;
 }
 .nav>li{
 	float:left
-}
-.el-input__inner{
-	height: 35px !important;
 }
 #changett{
 	margin-right: 6% !important;
@@ -86,10 +78,6 @@ width: 1280px;
 .table-striped > tbody > tr:nth-child(2n){
 	background-color: #363636 !important;
 }
-.btn-default:hover {
-	color: #ffffff !important;
-	border-color: #ffffff !important;
-}
 .el-date-table td.in-range div{
 	background-color: #4a2aff !important;
 	color: #ffffff;
@@ -97,24 +85,30 @@ width: 1280px;
 /*.el-date-editor--daterange.el-input__inner:hover{*/
 	/*color: #ffffff !important;*/
 /*}*/
-.btn-default {
-	border-color: #ffffff !important;
-}
 .el-input__inner{
-	border: 1px solid #ffffff !important;
+	background: #202020 !important;
+	color: #999999 !important;
+	text-align: center !important;
+	height: 28px !important;
+	width: 185px !important;
+	border-color: #707070 !important;
+	border-radius: 0 !important;
+}
+.el-input__suffix{
+	display: none;
 }
 .col-sm-12 {
     width: 60% !important;
 }
 .timePick{
-	width: 251px !important;
+	width: 185px !important;
 	background: #363636 !important;
 }
 .el-date-picker.has-sidebar {
 	width: 390px !important;
 }
 .el-date-range-picker.has-sidebar {
-	width: 20% !important;
+	width: 320px !important;
 }
 .el-picker-panel__content.el-date-range-picker__content.is-right{
 	display: none !important;
@@ -154,11 +148,12 @@ width: 1280px;
 	margin-left: 18% !important;
 }
 .el-range-input{
-	background: #363636 !important;
-	color: #ffffff !important;
+	background: #202020 !important;
+	color: #999999 !important;
 }
 .el-range-separator{
-	color: #ffffff !important;
+	color: #999999 !important;
+	line-height: 30px !important;
 }
 .el-picker-panel__sidebar{
 	min-width: 70px !important;
@@ -173,9 +168,9 @@ width: 1280px;
 .layui-laydate .layui-this{
 	background-color: #4a2cf8 !important;
 }
-.highcharts-container{
-	background: #363636 !important;
-}
+/*.highcharts-container{*/
+	/*background: #363636 !important;*/
+/*}*/
 /*.highcharts-root{*/
 	/*margin-top:10px !important;*/
 	/*width: 1656px !important;*/
@@ -191,22 +186,11 @@ width: 1280px;
 .partTwo>table>tbody>tr{
 	border: none !important;
 }
-
-#cha{
-	width: 60px;
-	background-color: #1E9FFF;
-	color: white;
-}
-#chaaa{
-	width: 60px;
-	background-color: #1E9FFF;
-	color: white;
-}
 .classpageinner{
 	position: relative;
 }
 #page-inner{
-	padding-left: 13%;
+	padding-left: 10.5%;
 }
 .main{
 	margin-top: 3%;
@@ -239,6 +223,188 @@ width: 1280px;
 .countDownTime{
 	float: left;
 	display:inline;
-	margin-right: 4%;
-	margin-top: 1.6%;
+	margin-left: 1%;
+	margin-top: .6%;
+	color: #999999;
+	font-size: 13px;
+}
+.el-input__inner{
+	background: #202020 !important;
+	color: #999999 !important;
+	text-align: center !important;
+	height: 28px !important;
+	width: 185px !important;
+	border-color: #707070 !important;
+	padding: 0 !important;
+}
+.el-input__suffix{
+	display: none;
+}
+.el-input__icon{
+	color: #999999;
+	line-height: 10px !important;
+}
+#page-wrapper{
+	padding: 1% 1.5% 2% 1%;
+}
+#real-btnN,#real-btnM,#real-btnQ,#real-btnR{
+	float: right;
+	width: 15px;
+	height: 15px;
+	margin-right: 2.5%;
+
+	cursor: pointer;
+	/*background-color: #1E9FFF;*/
+	/*color: white;*/
+	/*border: none;*/
+	/*border-radius: 4px;*/
+}
+#real-btnN{
+	margin-top: 1%;
+}
+.helpDescription{
+	display: none;
+	position: absolute;
+	margin-left: 68%;
+	margin-top: 1%;
+	z-index: 100;
+}
+
+.father:hover .helpDescription{display: block}
+.help{
+	width: 15px;
+	height: 15px;
+	float: right;
+	margin-right: 1.2%;
+}
+#dangerLine{
+	height: 60px;
+	/* line-height: 0px; */
+	border: 1px solid #707070;
+	padding-left: 0;
+}
+#dangerLineNext{
+	border: 1px solid #707070;
+	width: 100%;
+	margin-top: 1%;
+	height: 60px;
+	padding-left: 0;
+}
+.el-range__icon{
+	line-height: 20px !important;
+	color: #999999 !important;
+}
+.el-range__close-icon{
+	display: none !important;
+}
+.delaytime{
+	margin-top: .6%;
+	width: 100%;
+	height: 300px;
+	border: 1px solid #707070;
+	float: left;
+}
+svg.highcharts-root{
+	padding-left: 0px !important;
+	padding-right: 20px !important;
+}
+#partTop{
+	border: 1px solid #707070;
+}
+#cha{
+	float: left;
+	background-color: #707070;
+	color: white;
+	width: 80px;
+	margin-top: 1.1%;
+	/*margin-left: -14%;*/
+	height: 28px;
+}
+#chaTop{
+	float: left;
+	background-color: #707070;
+	color: white;
+	width: 80px;
+	margin-top: 1.1%;
+	/*margin-left: -14%;*/
+	height: 28px;
+}
+.btn-default {
+	border-color: #707070 !important;
+	height: 28px;
+	color: #999999 !important;
+}
+.btn{
+	border-radius: 0;
+	padding: 0;
+}
+.btn-default:hover {
+	color: #999999 !important;
+	border-color: #707070 !important;
+}
+#partFourLeft,#partFiveRight,#partFiveL,#partFiveR{
+	border: 1px solid #707070;
+}
+#loadfen, #loadphone, #loadver, #loadnet {
+	border: 1px solid #707070;
+	padding-top: 7%;
+
+}
+#partCpu{
+	margin-top: 1.3%;
+	float: left;
+	width: 100%;
+	height: 325px;
+	border: 1px solid #707070;
+	padding-top: 5px;
+}
+#partGPU{
+	margin-top:1.1%;
+	float: left;
+	width: 100%;
+	height: 325px;
+	border: 1px solid #707070;
+	padding-top: 5px;
+}
+.cpuTag,.gpuTag{
+	height: 25px;
+	margin-bottom: 3px;
+	line-height: 25px;
+	width: 295px;
+	color: #ffffff;
+	font-size: 14px;
+	padding-left: 5px;
+}
+.cpuO,.gpuO{
+	background: #10cfbd;
+}
+.cpuT,.gpuT{
+	background: #f55753;
+}
+.cpuTH,.gpuTH{
+	background: #a873ec;
+}
+.cpuF,.gpuF{
+	background: #cf10a2;
+}
+.cpuFI,.gpuFI{
+	background: #42e24f;
+}
+.cpuS,.gpuS{
+	background: #d6731b;
+}
+.cpuSE,.gpuSE{
+	background: #7095f2;
+}
+.cpuE,.gpuE{
+	background: #254077;
+}
+.cpuN,.gpuN{
+	background: #0549f3;
+}
+.cpuTE,.gpuTE{
+	background: #aea923;
+}
+#loaddelay,#loadcpu,#loadgpu{
+	padding-top: 5%;
 }
