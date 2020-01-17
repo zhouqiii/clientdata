@@ -1,5 +1,5 @@
 ﻿# clientdata
-umi工作 —— 客户端数据收集，应用在天空之门和救赎之地后台数据通用的页面（外网地址：http://center.umi-game.cn/）
+umi工作 —— 客户端数据收集，应用在天空之门和救赎之地后台数据通用的页面（外网地址：http://center.umi-game.cn或者http://center.umi-game.cn:9400/view/realAll.html）
 主要使用结合highcharts和echarts展示数据
 1.中国地图结合china.js 这里上传了一个/js/dist配置文件可以借鉴使用方法
 2.导出功能使用的都是table2Excel，简单粗暴，模式固定，每个页面都有使用方法
